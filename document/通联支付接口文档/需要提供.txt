@@ -1,0 +1,42 @@
+1 app_key aop分配给应用的appkey
+2 调用接口的地址
+3 签名算法
+4 密码加密算法
+
+这是测试相关数据：
+ 
+开放平台测试环境
+String url = "http://116.228.64.55:8080/aop/rest ";
+String appkey = "test";
+String secret = "test"; (请求密钥)
+数据密钥：abcdefgh
+
+机构号为0229000040
+
+卡号：8668083660000002247
+商户号 999990053990001
+支付活动 0000000002
+产品：0001
+密码：111111
+
+密码需要加密：
+	时间戳+aop+原始密码，再进行DES加密
+	DES("时间戳aop原始密码")
+	例如：密码111111
+	
+
+签名：
+	1 参数排序
+	  将所有参数按照字母先后顺序进行排序
+	  例如：foo=1, bar=2, baz=3 
+	  排序后bar=2，baz=3，foo=1
+	  得到拼装字符串bar2baz3foo1
+	2 MD5加密
+	  将secretcode同时拼接到参数字符串头、尾进行md5加密，再转成大写
+	  格式为：byte2hex (md5(secretkey1value1key2value2...secret))。  
+
+
+card_id=8668083660000002247
+format=json
+method=allinpay.card.cardinfo.get
+password=111111

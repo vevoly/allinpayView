@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="allinpayView:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="allinpayView.war">
+      <element id="artifact" artifact-name="allinpayView:war exploded" />
+    </root>
+  </artifact>
+</component>
