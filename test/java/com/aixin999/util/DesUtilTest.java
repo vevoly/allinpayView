@@ -1,6 +1,7 @@
 package com.aixin999.util;
 
 import org.junit.Test;
+import sun.misc.BASE64Encoder;
 
 /**
  * Created by borong on 2017/9/1.

@@ -22,21 +22,33 @@ String secret = "test"; (请求密钥)
 密码需要加密：
 	时间戳+aop+原始密码，再进行DES加密
 	DES("时间戳aop原始密码")
-	例如：密码111111
-	
+	得到的结果需要进行Base64转换为String
+	例如：20110312192443aop111111加密结果为：
+	oBvgoDKgIN6/Moy4DKioZoL6XdLndk0k
 
 签名：
 	1 参数排序
 	  将所有参数按照字母先后顺序进行排序
-	  例如：foo=1, bar=2, baz=3 
+	  例如：foo=1, bar=2, baz=3
 	  排序后bar=2，baz=3，foo=1
 	  得到拼装字符串bar2baz3foo1
 	2 MD5加密
 	  将secretcode同时拼接到参数字符串头、尾进行md5加密，再转成大写
-	  格式为：byte2hex (md5(secretkey1value1key2value2...secret))。  
+	  格式为：byte2hex (md5(secretkey1value1key2value2...secret))。
 
-
+app_key=test
 card_id=8668083660000002247
 format=json
 method=allinpay.card.cardinfo.get
-password=111111
+password=4uT7zULtmpQ3SOVfdIpjLOpk9UwgX2rs
+sign_v=1
+timestamp=20170904161948
+v=1.0
+
+byte2hex(md5(secretkey1value1key2value2...secret))
+
+testapp_keytestcard_id8668083660000002247formatjsonmethodallinpay.card.cardinfo.getpassword4uT7zULtmpQ3SOVfdIpjLOpk9UwgX2rssign_v1timestamp20170904161948v1.0test
+签名结果：0186622F17C5C82FD0B56F476E44EA75
+
+返回结果：
+{"card_cardinfo_get_response":{"res_timestamp":20170904163935,"res_sign":"D555A152FF60004C46463986DED5FCD8","card_info":{"card_stat":0,"brh_id":"0229000040","brand_id":"0001","validity_date":20190718,"card_id":8668083660000002247,"card_product_info_arrays":{"card_product_info":[{"product_stat":0,"product_id":"0001","product_name":"通用金额","validity_date":20190718,"valid_balance":13709,"card_id":8668083660000002247,"account_balance":13709},{"product_stat":0,"product_id":"0002","product_name":"行业预付卡","validity_date":20190718,"valid_balance":99348,"card_id":8668083660000002247,"account_balance":99348},{"product_stat":0,"product_id":"0204","product_name":"jlh测试产品","validity_date":20161012,"valid_balance":100000,"card_id":8668083660000002247,"account_balance":100100},{"product_stat":0,"product_id":"0282","product_name":"200元现金券","validity_date":20161012,"valid_balance":0,"card_id":8668083660000002247,"account_balance":0},{"product_stat":0,"product_id":"0283","product_name":"500元现金券","validity_date":20161012,"valid_balance":0,"card_id":8668083660000002247,"account_balance":0},{"product_stat":0,"product_id":3999,"product_name":"会员计次","validity_date":20161012,"valid_balance":4100,"card_id":8668083660000002247,"account_balance":4100},{"product_stat":0,"product_id":5001,"product_name":"赠送金额","validity_date":20191020,"valid_balance":1000,"card_id":8668083660000002247,"account_balance":1000},{"product_stat":0,"product_id":7999,"product_name":"会员计次","validity_date":20161012,"valid_balance":110000,"card_id":8668083660000002247,"account_balance":110000}]}}}}
