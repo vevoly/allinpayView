@@ -1,8 +1,7 @@
 package com.aixin999.test;
 
+import com.aixin999.util.AllinpayUtil;
 import com.aixin999.util.DateTools;
-import com.aixin999.util.DesUtil;
-import org.bouncycastle.jce.provider.JCEMac;
 import org.junit.Test;
 
 import java.util.Date;
@@ -45,7 +44,7 @@ public class InterfaceTest {
         timestamp = "20110312192443";
         String pwd = timestamp + "aop" + password;
         System.out.println("时间戳：" + timestamp + ", 密码：" + password);
-        System.out.println("DES加密结果：" + DesUtil.encrypt(pwd, datakey));
+        System.out.println("DES加密结果：" + AllinpayUtil.desCrypto(pwd.getBytes(), datakey));
     }
 
 }

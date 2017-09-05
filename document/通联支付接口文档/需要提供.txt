@@ -52,3 +52,93 @@ testapp_keytestcard_id8668083660000002247formatjsonmethodallinpay.card.cardinfo.
 
 返回结果：
 {"card_cardinfo_get_response":{"res_timestamp":20170904163935,"res_sign":"D555A152FF60004C46463986DED5FCD8","card_info":{"card_stat":0,"brh_id":"0229000040","brand_id":"0001","validity_date":20190718,"card_id":8668083660000002247,"card_product_info_arrays":{"card_product_info":[{"product_stat":0,"product_id":"0001","product_name":"通用金额","validity_date":20190718,"valid_balance":13709,"card_id":8668083660000002247,"account_balance":13709},{"product_stat":0,"product_id":"0002","product_name":"行业预付卡","validity_date":20190718,"valid_balance":99348,"card_id":8668083660000002247,"account_balance":99348},{"product_stat":0,"product_id":"0204","product_name":"jlh测试产品","validity_date":20161012,"valid_balance":100000,"card_id":8668083660000002247,"account_balance":100100},{"product_stat":0,"product_id":"0282","product_name":"200元现金券","validity_date":20161012,"valid_balance":0,"card_id":8668083660000002247,"account_balance":0},{"product_stat":0,"product_id":"0283","product_name":"500元现金券","validity_date":20161012,"valid_balance":0,"card_id":8668083660000002247,"account_balance":0},{"product_stat":0,"product_id":3999,"product_name":"会员计次","validity_date":20161012,"valid_balance":4100,"card_id":8668083660000002247,"account_balance":4100},{"product_stat":0,"product_id":5001,"product_name":"赠送金额","validity_date":20191020,"valid_balance":1000,"card_id":8668083660000002247,"account_balance":1000},{"product_stat":0,"product_id":7999,"product_name":"会员计次","validity_date":20161012,"valid_balance":110000,"card_id":8668083660000002247,"account_balance":110000}]}}}}
+
+{
+    "card_cardinfo_get_response": {
+        "res_timestamp": 20170905094854,
+        "res_sign": "3379A0364ED33EA6D827F4C3540D4698",
+        "card_info": {
+            "card_stat": 0,
+            "brh_id": "0229000040",
+            "brand_id": "0001",
+            "validity_date": 20190718,
+            "card_id": 8668083660000002000,
+            "card_product_info_arrays": {
+                "card_product_info": [
+                    {
+                        "product_stat": 0,
+                        "product_id": "0001",
+                        "product_name": "通用金额",
+                        "validity_date": 20190718,
+                        "valid_balance": 13709,
+                        "card_id": 8668083660000002000,
+                        "account_balance": 13709
+                    },
+                    {
+                        "product_stat": 0,
+                        "product_id": "0002",
+                        "product_name": "行业预付卡",
+                        "validity_date": 20190718,
+                        "valid_balance": 99348,
+                        "card_id": 8668083660000002000,
+                        "account_balance": 99348
+                    },
+                    {
+                        "product_stat": 0,
+                        "product_id": "0204",
+                        "product_name": "jlh测试产品",
+                        "validity_date": 20161012,
+                        "valid_balance": 100000,
+                        "card_id": 8668083660000002000,
+                        "account_balance": 100100
+                    },
+                    {
+                        "product_stat": 0,
+                        "product_id": "0282",
+                        "product_name": "200元现金券",
+                        "validity_date": 20161012,
+                        "valid_balance": 0,
+                        "card_id": 8668083660000002000,
+                        "account_balance": 0
+                    },
+                    {
+                        "product_stat": 0,
+                        "product_id": "0283",
+                        "product_name": "500元现金券",
+                        "validity_date": 20161012,
+                        "valid_balance": 0,
+                        "card_id": 8668083660000002000,
+                        "account_balance": 0
+                    },
+                    {
+                        "product_stat": 0,
+                        "product_id": 3999,
+                        "product_name": "会员计次",
+                        "validity_date": 20161012,
+                        "valid_balance": 4100,
+                        "card_id": 8668083660000002000,
+                        "account_balance": 4100
+                    },
+                    {
+                        "product_stat": 0,
+                        "product_id": 5001,
+                        "product_name": "赠送金额",
+                        "validity_date": 20191020,
+                        "valid_balance": 1000,
+                        "card_id": 8668083660000002000,
+                        "account_balance": 1000
+                    },
+                    {
+                        "product_stat": 0,
+                        "product_id": 7999,
+                        "product_name": "会员计次",
+                        "validity_date": 20161012,
+                        "valid_balance": 110000,
+                        "card_id": 8668083660000002000,
+                        "account_balance": 110000
+                    }
+                ]
+            }
+        }
+    }
+}

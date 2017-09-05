@@ -11,6 +11,10 @@ import javax.crypto.spec.IvParameterSpec;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * 通联支付工具类
@@ -74,4 +78,75 @@ public class AllinpayUtil {
         }
         return null;
     }
+
+    /**
+     * 生成参数排序字符串
+     * @param params
+     * @return
+     */
+    private static Map<String, Object> sortMap(Map<String, Object> params) {
+        Map<String, Object> sortMap = new TreeMap<String, Object>(new MapKeyComparator());
+        sortMap.putAll(params);
+        return sortMap;
+    }
+
+    /**
+     * 比较类
+     */
+    private static class MapKeyComparator implements Comparator<String> {
+        @Override
+        public int compare(String o1, String o2) {
+            return o1.compareTo(o2);
+        }
+    }
+
+    /**
+     * 生成密码加密后的字符串
+     * @param password 密码
+     * @param secretKey 数据密钥
+     * @return 时间戳+aop+原始密码，再进行DES加密，再进行BASE64加密得到字符串
+     */
+    public static String passwordCrypto(String password, String secretKey) {
+        try {
+            String timestamp = DateTools.dateToNum14(new Date());
+            password = timestamp + "aop" + password;
+            return Base64Util.encode(desCrypto(password.getBytes(), secretKey));
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 生成签名字符串
+     * @param params 参数列表
+     * @return 签名字符串，byte2hex(md5(secretkey1value1key2value2...secret))
+     */
+    public static String buildSignature(Map<String, Object> params) throws Exception {
+        String appKey = (String) params.get("app_key");
+        if(appKey == null) return null;
+        params = sortMap(params);
+        StringBuilder signString = new StringBuilder(appKey);
+        for(Map.Entry<String, Object> entry : params.entrySet()) {
+            signString.append(entry.getKey() + entry.getValue());
+        }
+        signString.append(appKey);
+        return byte2hex(encryptMD5(signString.toString()));
+    }
+
+    /**
+     * 参数拼装
+     * @param params 参数列表
+     * @return 按规则拼接好的字符串
+     */
+    public static String buildParams(Map<String, Object> params) throws Exception {
+        StringBuilder ret = new StringBuilder();
+        for(Map.Entry<String, Object> entry : params.entrySet()) {
+            ret.append(entry.getKey() + "=" + entry.getValue() + "&");
+        }
+        //加签名
+        ret.append("sign=" + buildSignature(params));
+        return ret.toString();
+    }
+
 }
