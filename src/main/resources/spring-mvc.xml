@@ -16,12 +16,17 @@
     <!-- 启动Springmvc注解驱动 -->
     <mvc:annotation-driven/>
 
-    <!-- 配置是图解析器 -->
-    <!--<bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:order="1">
+    <!-- 静态资源访问 -->
+     <mvc:resources location="/img/" mapping="/img/**"/>
+     <mvc:resources location="/js/" mapping="/js/**"/>
+     <mvc:resources location="/css/" mapping="/css/**"/>
+
+    <!-- 配置视图解析器 -->
+    <bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:order="1">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="contentType" value="text/html"/>
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
-    </bean>-->
+    </bean>
 
 </beans>

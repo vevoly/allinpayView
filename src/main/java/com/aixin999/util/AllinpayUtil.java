@@ -9,6 +9,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.IvParameterSpec;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 import java.util.Comparator;
@@ -131,6 +132,7 @@ public class AllinpayUtil {
             signString.append(entry.getKey() + entry.getValue());
         }
         signString.append(appKey);
+        System.out.println(signString.toString());
         return byte2hex(encryptMD5(signString.toString()));
     }
 
@@ -142,10 +144,10 @@ public class AllinpayUtil {
     public static String buildParams(Map<String, Object> params) throws Exception {
         StringBuilder ret = new StringBuilder();
         for(Map.Entry<String, Object> entry : params.entrySet()) {
-            ret.append(entry.getKey() + "=" + entry.getValue() + "&");
+            ret.append(entry.getKey() + "=" + URLEncoder.encode((String) entry.getValue(), "utf-8") + "&");
         }
         //加签名
-        ret.append("sign=" + buildSignature(params));
+        ret.append("sign=" + URLEncoder.encode(buildSignature(params), "utf-8"));
         return ret.toString();
     }
 

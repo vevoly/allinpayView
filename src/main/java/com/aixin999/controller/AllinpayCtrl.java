@@ -97,6 +97,7 @@ public class AllinpayCtrl {
             String paramString = AllinpayUtil.buildParams(params);
             //调用接口并获取返回数据
             ret = HttpClientUtil.sendGet(httpUrl, paramString);
+            System.out.println(ret);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -123,6 +124,7 @@ public class AllinpayCtrl {
         try {
             String paramString = AllinpayUtil.buildParams(params);
             ret = HttpClientUtil.sendGet(httpUrl, paramString);
+            System.out.println(ret);
         } catch (Exception e) {
             e.printStackTrace();
         }
