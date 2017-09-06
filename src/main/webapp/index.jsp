@@ -74,17 +74,11 @@
                 else if(data.card_cardinfo_get_response){
                     var cardInfo = data.card_cardinfo_get_response.card_info;
                     var cardProductInfoArrays = cardInfo.card_product_info_arrays;
-                    //alert("cardProductInfoArrays = " + cardProductInfoArrays);
                     var cardProductInfo = cardProductInfoArrays.card_product_info;
-                    //alert("cardProductInfo = " + cardProductInfo);
                     var balance = cardProductInfo[0].account_balance;
-                    //alert("balance = " + balance);
                     $info.html("<font style='color:#5FBF5F'>账户余额：" + balance + "</font>");
                 }
-                /*if(data.flag) var colour = "#5FBF5F";
-                else var colour = "red";
 
-                $info.html("<font style='color:" + colour + "'>" + data.msg + "</font>");*/
             },
             error : function() {
                 $info.html("网络连接失败，请检网络后重试!");

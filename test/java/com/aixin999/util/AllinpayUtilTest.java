@@ -114,11 +114,11 @@ public class AllinpayUtilTest {
     @Test
     public void httpSendTest() throws Exception {
         String cfg = "cfg.properties";
-        String url = PropertyUtil.getValueByKey(cfg, "http_url");//"http://116.228.64.55:8080/aop/rest";
+        String url = PropertyUtil.getValueByKey(cfg, "http_url");
         String timestamp = DateTools.dateToNum14(new Date());
         String password = "111111";
         String secretKey = PropertyUtil.getValueByKey(cfg, "secret_key");
-        String appKey = PropertyUtil.getValueByKey(cfg, "app_key");//"test";
+        String appKey = PropertyUtil.getValueByKey(cfg, "app_key");
 
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("timestamp", timestamp);

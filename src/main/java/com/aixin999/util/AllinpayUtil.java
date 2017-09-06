@@ -132,7 +132,7 @@ public class AllinpayUtil {
             signString.append(entry.getKey() + entry.getValue());
         }
         signString.append(appKey);
-        System.out.println(signString.toString());
+        //System.out.println(signString.toString());
         return byte2hex(encryptMD5(signString.toString()));
     }
 
