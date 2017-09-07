@@ -112,7 +112,7 @@ public class AllinpayUtilTest {
     }
 
     @Test
-    public void httpSendTest() throws Exception {
+    public void httpSendGetCardInfoTest() throws Exception {
         String cfg = "cfg.properties";
         String url = PropertyUtil.getValueByKey(cfg, "http_url");
         String timestamp = DateTools.dateToNum14(new Date());
@@ -132,6 +132,46 @@ public class AllinpayUtilTest {
 
         String paramString = AllinpayUtil.buildParams(params);
         System.out.println(HttpClientUtil.sendGet(url, paramString));
+
+    }
+
+    @Test
+    public void dateStringTest() {
+        String timestamp = DateTools.dateToNum14(new Date());
+        String endDate = DateTools.dateToNum8(DateTools.getBeforeSomeOneDay(90));
+        System.out.println(endDate);
+    }
+
+    @Test
+    public void httpSendPostCardLogTest() throws Exception {
+        String cfg = "cfg.properties";
+        String url = PropertyUtil.getValueByKey(cfg, "http_url");
+        String timestamp = DateTools.dateToNum14(new Date());
+        String password = "111111";
+        String secretKey = PropertyUtil.getValueByKey(cfg, "secret_key");
+        String appKey = PropertyUtil.getValueByKey(cfg, "app_key");
+
+        String endDate = DateTools.dateToNum8(new Date());
+        String beginDate = DateTools.dateToNum8(DateTools.getBeforeSomeOneDay(90));
+
+
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("timestamp", timestamp);
+        params.put("method", PropertyUtil.getValueByKey(cfg, "method.get_card_log"));
+        params.put("format", "json");
+        params.put("v", "1.0");
+        params.put("app_key", appKey);
+        params.put("card_id", "8668083660000002247");
+        params.put("password", AllinpayUtil.passwordCrypto(password, secretKey));
+        params.put("sign_v", "1");
+
+        params.put("page_no", "1");
+        params.put("page_size", "30");
+        params.put("begin_date", beginDate);
+        params.put("end_date", endDate);
+
+        String paramString = AllinpayUtil.buildParams(params);
+        System.out.println(HttpClientUtil.sendPost(url, paramString));
 
     }
 

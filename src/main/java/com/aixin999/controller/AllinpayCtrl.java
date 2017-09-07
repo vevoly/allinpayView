@@ -107,8 +107,15 @@ public class AllinpayCtrl {
     @RequestMapping(value = "getCardLog", method = RequestMethod.GET, produces = "text/json;charset=UTF-8")
     @ResponseBody
     public String getCardLog(String cardId, String password, String beginDate, String endDate, String pageNo, String pageSize) {
+        //如果没有起始日期beginDate的话，起始日期beginDate为当前日期-90；结束日期endDate为当前日期
+        beginDate = beginDate == null || "".equals(beginDate) ? DateTools.dateToNum8(DateTools.getBeforeSomeOneDay(90)) : beginDate;
+        endDate = endDate == null || "".equals(endDate) ? DateTools.dateToNum8(new Date()) : endDate;
+        //如果没有页码pageNo的话，页码为1
+        pageNo = pageNo == null || "".equals(pageNo) || "0".equals(pageNo) ? "1" : pageNo;
+        //如果没有pageSize的话，pageSize为30
+        pageSize = pageSize == null || "".equals(pageSize) ? "30" : pageSize;
 
-        String method = PropertyUtil.getValueByKey("cfg.properties", "method.get_card_info");
+        String method = PropertyUtil.getValueByKey("cfg.properties", "method.get_card_log");
         String timestamp = DateTools.dateToNum14(new Date());
         String ret = null;
         Map<String, Object> params = new HashMap<String, Object>();
@@ -121,9 +128,14 @@ public class AllinpayCtrl {
         params.put("password", AllinpayUtil.passwordCrypto(password, secretKey));
         params.put("sign_v", signV);
 
+        params.put("page_no", pageNo);
+        params.put("page_size", pageSize);
+        params.put("begin_date", beginDate);
+        params.put("end_date", endDate);
+
         try {
             String paramString = AllinpayUtil.buildParams(params);
-            ret = HttpClientUtil.sendGet(httpUrl, paramString);
+            ret = HttpClientUtil.sendPost(httpUrl, paramString);
             System.out.println(ret);
         } catch (Exception e) {
             e.printStackTrace();

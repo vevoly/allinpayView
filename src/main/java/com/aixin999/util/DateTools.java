@@ -221,6 +221,10 @@ public class DateTools {
         return format(date, "yyyyMMddHHmmss");
     }
 
+    public static String dateToNum8(Date date) {
+        return format(date, "yyyyMMdd");
+    }
+
     public static String StringHmsToNum6(String str) {
         return str.replaceAll(":", "");
     }
@@ -505,6 +509,24 @@ public class DateTools {
         long between_days = (time2 - time1) / (1000 * 3600 * 24);
 
         return Integer.parseInt(String.valueOf(between_days));
+    }
+
+    /**
+     * 获取前多少天
+     * @param date_num 前几天
+     * @return
+     */
+    public static Date getBeforeSomeOneDay(int date_num) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date());
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int date = c.get(Calendar.DATE);
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
+        int second = c.get(Calendar.SECOND);
+        c.set(year, month, date - date_num, hour, minute, second);
+        return c.getTime();
     }
 
     /**
@@ -982,6 +1004,7 @@ public class DateTools {
         }
         return birthday;
     }
+
 
     public static void main(String[] args) {
 

@@ -39,8 +39,7 @@ public class HttpClientUtil {
 			connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 			// connection.setRequestProperty("Accept-Charset", "utf-8");
 			// connection.setRequestProperty("contentType", "utf-8");
-			// connection.setRequestProperty("user-agent", "Mozilla/4.0
-			// (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+			// connection.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
 			// 建立实际的连接
 			connection.connect();
 			// 获取所有响应头字段
@@ -95,7 +94,11 @@ public class HttpClientUtil {
 			// 设置通用的请求属性
 			conn.setRequestProperty("accept", "*/*");
 			conn.setRequestProperty("connection", "Keep-Alive");
-			conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+			conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+			/*conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+			conn.setRequestProperty("Accept-Charset", "utf-8");
+			conn.setRequestProperty("contentType", "utf-8");*/
 			// 发送POST请求必须设置如下两行
 			conn.setDoOutput(true);
 			conn.setDoInput(true);
@@ -106,7 +109,7 @@ public class HttpClientUtil {
 			// flush输出流的缓冲
 			out.flush();
 			// 定义BufferedReader输入流来读取URL的响应
-			in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
 			String line;
 			while ((line = in.readLine()) != null) {
 				result += line;

@@ -2,8 +2,8 @@
     margin: 0 auto;
     margin-top: 10px;
     text-align: center;
-    width: 700px;
-    height: 500px;
+    width: 1000px;
+    height: 100%;
     overflow: auto;
     border: 2px #ccc solid;
     color: #666;
@@ -19,9 +19,9 @@
 }
 
 .bindContainer .tipRow {
-    margin:5px auto;
+    margin:15px auto;
     text-align:center;
-    font-size:10px;
+    font-size:16px;
     letter-spacing: 2px;
 }
 
@@ -49,15 +49,25 @@
     border: 1px #ccc solid;
     border-radius: 5px;
 }
-
+#info {
+    padding-top:5px;
+}
 #info ul li{
     margin:5px;
 }
-#info ul li .label {
-    width: 100px;
-    display: inline-block;
-    text-align: right;
+#info ul li {
+    width: 300px;
+    display:block;
+    text-align: left;
     padding-right: 5px;
+}
+
+#info table {
+    width: 100%;
+}
+
+#info table tbody {
+    font-size:12px;
 }
 
 .bindContainer #confirm, #reset {
