@@ -7,7 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by borong on 2017/9/1.
+ * Created by 柳阳 on 2017/9/1.
+ * 测试
  */
 public class AllinpayUtilTest {
 
