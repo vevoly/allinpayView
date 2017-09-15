@@ -86,7 +86,7 @@ function getCardInfo() {
                 //卡状态
                 var cardStatus = convertCardStatus(cardInfo.card_stat);
 
-                $info.html("<ul><li>账户状态：" + cardStatus + "</li><li>账户余额：" + accountBalance + "</li><li>可用余额：" + validBalance + "</li><li>账户有效期：" + validDate + "</li></ul>");
+                $info.html("<ul><li>账户状态：" + cardStatus + "</li><li>账户余额：" + formatMoney(accountBalance) + "</li><li>可用余额：" + formatMoney(validBalance) + "</li><li>账户有效期：" + validDate + "</li></ul>");
             }
 
         },
@@ -131,7 +131,7 @@ function getCardLog() {
                 var td = "<tbody>";
                 for(var i = 0; i < txn_log.length; i++) {
                     td = txn_log[i];
-                    tr_html += "<tr><td>" + (i+1) + "</td><td>" + td.int_txn_seq_id + "</td><td>" + td.int_txn_dt+ "</td><td>" + td.int_txn_tm + "</td><td>" + td.accept_brh_id + "</td><td>" + td.term_id + "</td><td>" + td.txn_at + "</td><td>" + td.txn_fee_at + "</td><td>" + td.txn_cd + "-" + convertTxnCd(td.txn_cd) + "</td><td>" + convertTxnStatus(td.txn_sta_cd) + "</td></tr>";
+                    tr_html += "<tr><td>" + (i+1) + "</td><td>" + td.int_txn_seq_id + "</td><td>" + td.int_txn_dt+ "</td><td>" + td.int_txn_tm + "</td><td>" + td.accept_brh_id + "</td><td>" + td.term_id + "</td><td>" + formatMoney(td.txn_at) + "</td><td>" + formatMoney(td.txn_fee_at) + "</td><td>" + td.txn_cd + "-" + convertTxnCd(td.txn_cd) + "</td><td>" + convertTxnStatus(td.txn_sta_cd) + "</td></tr>";
                 }
                 table_html += tr_html + "</tbody></table>";
                 $info.html(table_html);
@@ -175,4 +175,12 @@ function convertTxnCd(stat) {
         "B0020" : "网上支付",
         "B0071" : "退货申请确认"
     }[stat];
+}
+
+//格式化金钱
+function formatMoney(money) {
+    var value = money + "";
+    var head = value.substring(0, value.length - 2);
+    var tail = value.substring(value.length - 2);
+    return head + "." + tail + "元";
 }

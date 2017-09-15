@@ -68,6 +68,7 @@ public class AllinpayUtilTest {
         String timestamp = DateTools.dateToNum14(new Date());
         String password = "111111";
         String secretKey = "abcdefgh";
+        String appSecret = "test";
         String appKey = "test";
         String sign = null;
         Map<String, Object> params = new HashMap<String, Object>();
@@ -81,7 +82,7 @@ public class AllinpayUtilTest {
         params.put("sign_v", "1");
 
         try {
-            sign = AllinpayUtil.buildSignature(params);
+            sign = AllinpayUtil.buildSignature(params, appSecret);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -99,6 +100,7 @@ public class AllinpayUtilTest {
         String password = "111111";
         String secretKey = "abcdefgh";
         String appKey = "test";
+        String appSecret = "test";
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("timestamp", timestamp);
         params.put("method", "allinpay.card.cardinfo.get");
@@ -109,7 +111,7 @@ public class AllinpayUtilTest {
         params.put("password", AllinpayUtil.passwordCrypto(password, secretKey));
         params.put("sign_v", "1");
 
-        System.out.println(AllinpayUtil.buildParams(params));
+        System.out.println(AllinpayUtil.buildParams(params, appSecret));
     }
 
     @Test
@@ -120,6 +122,7 @@ public class AllinpayUtilTest {
         String password = "111111";
         String secretKey = PropertyUtil.getValueByKey(cfg, "secret_key");
         String appKey = PropertyUtil.getValueByKey(cfg, "app_key");
+        String appSecret = PropertyUtil.getValueByKey(cfg, "app_secret");
 
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("timestamp", timestamp);
@@ -131,7 +134,7 @@ public class AllinpayUtilTest {
         params.put("password", AllinpayUtil.passwordCrypto(password, secretKey));
         params.put("sign_v", "1");
 
-        String paramString = AllinpayUtil.buildParams(params);
+        String paramString = AllinpayUtil.buildParams(params, appSecret);
         System.out.println(HttpClientUtil.sendGet(url, paramString));
 
     }
@@ -151,9 +154,10 @@ public class AllinpayUtilTest {
         String password = "111111";
         String secretKey = PropertyUtil.getValueByKey(cfg, "secret_key");
         String appKey = PropertyUtil.getValueByKey(cfg, "app_key");
+        String appSecret = PropertyUtil.getValueByKey(cfg, "app_secret");
 
         String endDate = DateTools.dateToNum8(new Date());
-        String beginDate = DateTools.dateToNum8(DateTools.getBeforeSomeOneDay(90));
+        String beginDate = DateTools.dateToNum8(DateTools.getBeforeSomeOneDay(7));
 
 
         Map<String, Object> params = new HashMap<String, Object>();
@@ -171,7 +175,7 @@ public class AllinpayUtilTest {
         params.put("begin_date", beginDate);
         params.put("end_date", endDate);
 
-        String paramString = AllinpayUtil.buildParams(params);
+        String paramString = AllinpayUtil.buildParams(params, appSecret);
         System.out.println(HttpClientUtil.sendPost(url, paramString));
 
     }

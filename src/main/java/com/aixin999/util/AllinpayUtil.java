@@ -123,16 +123,15 @@ public class AllinpayUtil {
      * @param params 参数列表
      * @return 签名字符串，byte2hex(md5(secretkey1value1key2value2...secret))
      */
-    public static String buildSignature(Map<String, Object> params) throws Exception {
-        String appKey = (String) params.get("app_key");
-        if(appKey == null) return null;
+    public static String buildSignature(Map<String, Object> params, String appSecret) throws Exception {
+        if(appSecret == null) return null;
         params = sortMap(params);
-        StringBuilder signString = new StringBuilder(appKey);
+        StringBuilder signString = new StringBuilder(appSecret);
         for(Map.Entry<String, Object> entry : params.entrySet()) {
             signString.append(entry.getKey() + entry.getValue());
         }
-        signString.append(appKey);
-        //System.out.println(signString.toString());
+        signString.append(appSecret);
+        //System.out.println("签名是：" + signString.toString());
         return byte2hex(encryptMD5(signString.toString()));
     }
 
@@ -141,13 +140,13 @@ public class AllinpayUtil {
      * @param params 参数列表
      * @return 按规则拼接好的字符串
      */
-    public static String buildParams(Map<String, Object> params) throws Exception {
+    public static String buildParams(Map<String, Object> params, String appSecret) throws Exception {
         StringBuilder ret = new StringBuilder();
         for(Map.Entry<String, Object> entry : params.entrySet()) {
             ret.append(entry.getKey() + "=" + URLEncoder.encode((String) entry.getValue(), "utf-8") + "&");
         }
         //加签名
-        ret.append("sign=" + URLEncoder.encode(buildSignature(params), "utf-8"));
+        ret.append("sign=" + URLEncoder.encode(buildSignature(params, appSecret), "utf-8"));
         return ret.toString();
     }
 

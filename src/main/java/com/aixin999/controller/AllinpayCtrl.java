@@ -36,6 +36,12 @@ public class AllinpayCtrl {
     String appKey;
 
     /**
+     * app secret
+     */
+    @Value("#{cfg.app_secret}")
+    String appSecret;
+
+    /**
      * 数据密钥，用户密码加密
      */
     @Value("#{cfg.secret_key}")
@@ -94,7 +100,7 @@ public class AllinpayCtrl {
 
         try {
             //组装参数
-            String paramString = AllinpayUtil.buildParams(params);
+            String paramString = AllinpayUtil.buildParams(params, appSecret);
             //调用接口并获取返回数据
             ret = HttpClientUtil.sendGet(httpUrl, paramString);
             //System.out.println(ret);
@@ -134,7 +140,7 @@ public class AllinpayCtrl {
         params.put("end_date", endDate);
 
         try {
-            String paramString = AllinpayUtil.buildParams(params);
+            String paramString = AllinpayUtil.buildParams(params, appSecret);
             ret = HttpClientUtil.sendPost(httpUrl, paramString);
             //System.out.println(ret);
         } catch (Exception e) {
